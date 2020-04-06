@@ -1,0 +1,35 @@
+{
+    "name": "marshmallow/dataset-country",
+    "description": "This dataset contains all the countries in the world. They are translateable in different languages. It is also possible to get the flag from said countries. The model is extendable so you can extend and overide all functionality if needed.",
+    "keywords": ["marshmallow"],
+    "homepage": "https://github.com/Marshmallow-Development/",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Stef",
+            "email": "stef@marshmallow.dev",
+            "homepage": "https://marshmallow.dev",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "email": "stef@marshmallow.dev"
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^7.4",
+        "marshmallow/commands": "^1.0",
+        "spatie/laravel-sluggable": "^2.2"
+    },
+    "autoload": {
+        "psr-4": {"Marshmallow\\Datasets\\Country\\": "src"}
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Marshmallow\\Datasets\\Country\\ServiceProvider"
+            ]
+        }
+    }
+}

@@ -20,6 +20,11 @@ class Country extends Model
         $builder->orderBy('name', 'asc');
     }
 
+    public function selected (Model $model)
+    {
+        return ($model->country->id == $this->id) ? 'selected="selected"' : '';
+    }
+
 	public function getNameLocale ()
 	{
 		return trans('country::country.' . $this->slug);

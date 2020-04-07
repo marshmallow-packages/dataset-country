@@ -5,6 +5,7 @@ namespace Marshmallow\Datasets\Country\Models;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Country extends Model
 {
@@ -13,6 +14,11 @@ class Country extends Model
     protected $guarded = [];
 
     protected $defaultFlagSize = 32;
+
+    public function scopeOrdered (Builder $builder)
+    {
+        $builder->orderBy('name', 'asc');
+    }
 
 	public function getNameLocale ()
 	{

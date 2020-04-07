@@ -22,7 +22,7 @@ class Country extends Model
 
     public function selected (Model $model)
     {
-        return ($model->country->id == $this->id) ? 'selected="selected"' : '';
+        return ($model->country && $model->country->id == $this->id) ? 'selected="selected"' : '';
     }
 
 	public function getNameLocale ()

@@ -15,52 +15,55 @@ class Country extends Model
 
     protected $defaultFlagSize = 32;
 
-    public function scopeOrdered (Builder $builder)
+    public function scopeOrdered(Builder $builder)
     {
         $builder->orderBy('name', 'asc');
     }
 
-    public function selected (Model $model)
+    public function selected(Model $model)
     {
         return ($model->country && $model->country->id == $this->id) ? 'selected="selected"' : '';
     }
 
-	public function getNameLocale ()
+	public function getNameLocale()
 	{
 		return trans('country::country.' . $this->slug);
 	}
 
-    public function getFlagAttribute ()
+    public function getFlagAttribute()
     {
         return $this->flag($this->defaultFlagSize);
     }
 
-    public function flag (int $size)
+    public function flag(int $size)
     {
         return $this->buildFlagPublicUrl($size);
     }
 
-    protected function buildFlagPublicUrl (int $size)
+    protected function buildFlagPublicUrl(int $size)
     {
-        return join('/', [
-            env('APP_URL'),
-            $this->flagFolderLocation(),
-            $this->flagSizeFolderName($size),
-            $this->flagImageName(),
-        ]);
+        return join(
+            '/',
+            [
+                env('APP_URL'),
+                $this->flagFolderLocation(),
+                $this->flagSizeFolderName($size),
+                $this->flagImageName(),
+            ]
+        );
     }
 
-    protected function flagFolderLocation ()
+    protected function flagFolderLocation()
     {
         return 'vendor/marshmallow/country/flags';
     }
 
-    protected function flagSizeFolderName (int $size)
+    protected function flagSizeFolderName(int $size)
     {
         return $size . 'x' . $size;
     }
 
-    protected function flagImageName ()
+    protected function flagImageName()
     {
         return sprintf(
             '%s.png',

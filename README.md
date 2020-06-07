@@ -8,7 +8,7 @@ This dataset contains all the countries in the world. They are translateable in 
 composer require marshmallow/dataset-country
 ```
 # Seed the table
-Run `php artisan db:seed --class=Marshmallow\\Datasets\\Country\\Database\\Seeds\\CountrySeeder` to seed the country table.
+Run `php artisan db:seed --class=Marshmallow\\Datasets\\Country\\Seeders\\CountrySeeder` to seed the country table.
 
 # Nova
 Are you using Nova? We have a command for you to generate the Nova Resource. Run `php artisan marshmallow:resource Country Datasets\\Country` and countries will be available to you in Nova. We hide this resource by default in the Nova navigation. If you wish to have it available in the navigation, add `public static $displayInNavigation = true;` to `app/Nova/Country.php`.

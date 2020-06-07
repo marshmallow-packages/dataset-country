@@ -1,9 +1,8 @@
 <?php
 
-namespace Marshmallow\Datasets\Country\Database\Seeds;
+namespace Marshmallow\Datasets\Country\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 use Marshmallow\Datasets\Country\Models\Country;
 
 /**
@@ -21,11 +20,14 @@ class CountrySeeder extends Seeder
     {
     	$countries = json_decode(file_get_contents(__dir__ . '/countries/en.json'));
 	    	foreach ($countries as $country) {
-	    		Country::create([
+	    		Country::updateOrCreate([
 	    			'name' => $country->name,
 	    			'alpha2' => strtoupper($country->alpha2),
 	    			'alpha3' => strtoupper($country->alpha3),
-	    		]);
+	    		],[
+                    'alpha2' => strtoupper($country->alpha2),
+                    'alpha3' => strtoupper($country->alpha3),
+                ]);
 	    	}
     }
 }

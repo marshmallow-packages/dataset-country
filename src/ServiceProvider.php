@@ -14,7 +14,8 @@ class ServiceProvider extends BaseServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__.'/config/country.php', 'country'
+            __DIR__ . '/../config/country.php',
+            'country'
         );
     }
 
@@ -26,18 +27,18 @@ class ServiceProvider extends BaseServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/config/country.php' => config_path('country.php'),
+            __DIR__.'/../config/country.php' => config_path('country.php'),
         ]);
 
-        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
-        $this->loadTranslationsFrom(__DIR__.'/resources/lang', 'country');
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'country');
 
         $this->publishes([
-            __DIR__.'/resources/lang' => resource_path('lang/vendor/example'),
+            __DIR__.'/../resources/lang' => resource_path('lang/vendor/example'),
         ], 'translations');
 
         $this->publishes([
-            __DIR__.'/public' => public_path('vendor/marshmallow/country'),
+            __DIR__.'/../resources/public' => public_path('vendor/marshmallow/country'),
         ], 'public');
     }
 }

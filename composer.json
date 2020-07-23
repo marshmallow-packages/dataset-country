@@ -22,6 +22,9 @@
         "marshmallow/commands": "^1.0",
         "spatie/laravel-sluggable": "^2.2"
     },
+    "suggest": {
+        "marshmallow/dataset-google-geotargets": "Provices google data on provinces, cities, airports etc."
+    }
     "autoload": {
         "psr-4": {"Marshmallow\\Datasets\\Country\\": "src"}
     },

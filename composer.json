@@ -24,7 +24,7 @@
     },
     "suggest": {
         "marshmallow/dataset-google-geotargets": "Provices google data on provinces, cities, airports etc."
-    }
+    },
     "autoload": {
         "psr-4": {"Marshmallow\\Datasets\\Country\\": "src"}
     },

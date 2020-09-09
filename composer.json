@@ -20,7 +20,7 @@
     "require": {
         "php": "^7.4",
         "marshmallow/commands": "^1.0",
-        "spatie/laravel-sluggable": "^2.5"
+        "marshmallow/sluggable": "^1.0"
     },
     "suggest": {
         "marshmallow/dataset-google-geotargets": "Provices google data on provinces, cities, airports etc."

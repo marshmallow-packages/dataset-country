@@ -18,16 +18,16 @@ class CountrySeeder extends Seeder
      */
     public function run()
     {
-    	$countries = json_decode(file_get_contents(__dir__ . '/countries/en.json'));
-	    	foreach ($countries as $country) {
-	    		Country::updateOrCreate([
-	    			'name' => $country->name,
-	    			'alpha2' => strtoupper($country->alpha2),
-	    			'alpha3' => strtoupper($country->alpha3),
-	    		],[
+        $countries = json_decode(file_get_contents(__dir__ . '/countries/en.json'));
+        foreach ($countries as $country) {
+            Country::updateOrCreate([
+                    'name' => $country->name,
+                    'alpha2' => strtoupper($country->alpha2),
+                    'alpha3' => strtoupper($country->alpha3),
+                ], [
                     'alpha2' => strtoupper($country->alpha2),
                     'alpha3' => strtoupper($country->alpha3),
                 ]);
-	    	}
+        }
     }
 }

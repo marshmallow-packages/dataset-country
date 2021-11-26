@@ -3,10 +3,11 @@
 namespace Marshmallow\Datasets\Country\Models;
 
 use Exception;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 use Marshmallow\Sluggable\HasSlug;
 use Marshmallow\Sluggable\SlugOptions;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Country extends Model
 {
@@ -48,10 +49,14 @@ class Country extends Model
 
     protected function buildFlagPublicUrl(int $size)
     {
+        $base_path = config('app.url');
+        if (Str::endsWith($base_path, '/')) {
+            $base_path = substr($base_path, 0, -1);
+        }
         return join(
             '/',
             [
-                env('APP_URL'),
+                $base_path,
                 $this->flagFolderLocation(),
                 $this->flagSizeFolderName($size),
                 $this->flagImageName(),
@@ -82,7 +87,7 @@ class Country extends Model
      */
     protected function googleGeoTargetIsAvailable()
     {
-        if (! class_exists(\Marshmallow\Datasets\GoogleGeoTargets\Models\GoogleGeoTarget::class)) {
+        if (!class_exists(\Marshmallow\Datasets\GoogleGeoTargets\Models\GoogleGeoTarget::class)) {
             throw new Exception('GoogleGeoTarget not found. Please run composer require marshmallow/dataset-google-geotargets');
         }
     }
@@ -92,17 +97,17 @@ class Country extends Model
         $this->googleGeoTargetIsAvailable();
 
         return $this->hasMany(\Marshmallow\Datasets\GoogleGeoTargets\Models\GoogleGeoTarget::class, 'country_id')
-                    ->select('google_geo_targets.*')
-                    ->join(
-                        'google_geo_target_types',
-                        'google_geo_targets.google_geo_target_type_id',
-                        '=',
-                        'google_geo_target_types.id'
-                    )
-                    ->where(
-                        'google_geo_target_types.google_name',
-                        \Marshmallow\Datasets\GoogleGeoTargets\Models\GoogleGeoTarget::PROVINCE
-                    );
+            ->select('google_geo_targets.*')
+            ->join(
+                'google_geo_target_types',
+                'google_geo_targets.google_geo_target_type_id',
+                '=',
+                'google_geo_target_types.id'
+            )
+            ->where(
+                'google_geo_target_types.google_name',
+                \Marshmallow\Datasets\GoogleGeoTargets\Models\GoogleGeoTarget::PROVINCE
+            );
     }
 
     /**

@@ -96,6 +96,12 @@ class Country extends Model
     {
         $this->googleGeoTargetIsAvailable();
 
+        $provinceType = 'Province';
+        if (class_exists(\Marshmallow\Datasets\GoogleGeoTargets\Models\GoogleGeoTarget::class) && 
+            defined(\Marshmallow\Datasets\GoogleGeoTargets\Models\GoogleGeoTarget::class . '::PROVINCE')) {
+            $provinceType = \Marshmallow\Datasets\GoogleGeoTargets\Models\GoogleGeoTarget::PROVINCE;
+        }
+
         return $this->hasMany(\Marshmallow\Datasets\GoogleGeoTargets\Models\GoogleGeoTarget::class, 'country_id')
             ->select('google_geo_targets.*')
             ->join(
@@ -106,7 +112,7 @@ class Country extends Model
             )
             ->where(
                 'google_geo_target_types.google_name',
-                \Marshmallow\Datasets\GoogleGeoTargets\Models\GoogleGeoTarget::PROVINCE
+                $provinceType
             );
     }
 
